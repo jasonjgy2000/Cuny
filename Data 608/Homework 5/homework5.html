@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>Homework 5</title>
+</head>
+<body>
+<h1>Data 608 Homework 5</h1>
+<h2>Jason Joseph</h2>
+<h2>Reverse Input</h2>
+<input type="text" id="txt_word" name="txt_word" placeholder="Enter Word Here">
+<button onclick="reverseWords()" id="btn_submit">Submit</button>
+<div id="div_reverseWords"></div>
+
+<h2>Multiple Generator</h2>
+
+<input type="text" id="txt_number" name="txt_number" placeholder="Enter Number Here">
+<button onclick="generateMultiple()" id="btn_numberSubmit">Submit</button>
+<div id="div_wordGenerator"></div>
+<table id="tbl_result" border="1">
+ 
+</table>
+
+
+
+
+
+<script type="text/javascript">
+
+function generateMultiple()
+{
+document.getElementById('div_wordGenerator').innerHTML = "";
+var input = document.getElementById('txt_number').value;
+var len = input.length;
+var table = document.getElementById("tbl_result");
+table.innerHTML = "";
+	if(isNaN(input))
+	{
+	 document.getElementById('div_wordGenerator').innerHTML = "<br/> Please enter numbers only.";
+	}
+	if(len < 1)
+	{
+	  document.getElementById('div_wordGenerator').innerHTML = "<br/> Please enter a number.";
+	}
+	if(!isNaN(input) && len > 0)
+	{
+		var num = parseInt(input);
+		var result = 0;
+		for(var x = 1; x<6;x++)
+			{
+			 var row = table.insertRow(x-1);
+			 
+			 for(var y = 1; y<5;y++)
+				{
+					result += num;				
+					var cell = row.insertCell(y-1);
+					cell.innerHTML = result;			
+					
+				}
+			}
+	}
+}
+
+function reverseWords()
+{
+
+var input = document.getElementById('txt_word').value;
+var len = input.length;
+if(len < 1)
+{
+  document.getElementById('div_reverseWords').innerHTML = "<br> Please enter a word.";
+}
+else
+{
+   var result = "";
+   for(var x= len; x >=0;x--)
+   {
+	 result += (input.charAt(x));
+   }
+   
+ document.getElementById('div_reverseWords').innerHTML = "<br> Reversed Word: "+ result;
+}
+}
+</script>
+</body>
+</html>
