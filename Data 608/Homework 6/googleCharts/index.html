@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Charts Homework</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="jquery.csv.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>	
+<script type="text/javascript"> // load the visualisation API
+  google.load('visualization', '1', { packages: ['corechart', 'controls'] });
+</script>
+<script type="text/javascript">
+function drawVisualization() {
+   $.get("refugeeArrival1980-2015.csv", function(csvString) {
+      // transform the CSV string into a 2-dimensional array
+      var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
+      // this new DataTable object holds all the data
+      var data = new google.visualization.arrayToDataTable(arrayData);
+      // CAPACITY - En-route ATFM delay - YY - CHART
+      var crt_ertdlyYY = new google.visualization.ChartWrapper({
+         chartType: 'LineChart',
+         containerId: 'dvi_chart',
+         dataTable: data,
+         options:{
+            width: 980, height: 200,
+            title: 'Refugee Arrivals into the U.S.A between 1980 - 2015',
+            titleTextStyle : {color: 'grey', fontSize: 11},
+			legend:'none',
+			vAxis: {title: 'Number of Refugees',
+			format: '',
+			titleTextStyle: {fontSize: 15}
+			}, 
+			hAxis: {title: 'Year',
+			format: '',
+			titleTextStyle: {fontSize: 15}
+			}, 
+         }
+      });
+      crt_ertdlyYY.draw();
+   });
+}
+google.setOnLoadCallback(drawVisualization)
+</script>
+
+</head>
+<body>
+<div id="dvi_chart"></div>
+<script type="text/javascript">
+</script>
+</body>
